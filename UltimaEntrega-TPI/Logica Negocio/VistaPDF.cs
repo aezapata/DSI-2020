@@ -124,10 +124,6 @@ namespace UltimaEntrega_TPI.Logica_Negocio
             SetNumeroPagina(numeroPagina);
         }
 
-        public void VisualizarReporteGenerado()
-        {
-            //exportaria el pdf a la pantalla
-        }
 
         public void AgregarEncabezado(string titulo, DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -138,5 +134,9 @@ namespace UltimaEntrega_TPI.Logica_Negocio
             document.Add(header);
         }
 
+        Object IFormasVisualizacion.VisualizarReporteGenerado()
+        {
+            return pdf;
+        }
     }
 }

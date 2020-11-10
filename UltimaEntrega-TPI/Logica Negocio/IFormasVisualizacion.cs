@@ -7,6 +7,6 @@ namespace UltimaEntrega_TPI.Logica_Negocio
 {
     public interface IFormasVisualizacion
     {
-        public abstract void VisualizarReporteGenerado();
+        public abstract Object VisualizarReporteGenerado();
     }
 }

@@ -90,8 +90,8 @@ namespace UltimaEntrega_TPI.Logica_Negocio
                 opcTotalizar, pedidos, null, nombreUsuarioLog, fechaHoraActual);
 
             var formaVisualizacion = constructor.ObtenerProducto();
-            formaVisualizacion.VisualizarReporteGenerado();
-            return formaVisualizacion;
+            var pdf = formaVisualizacion.VisualizarReporteGenerado();
+            return pdf;
         }
 
     }
