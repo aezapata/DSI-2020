@@ -7,7 +7,13 @@ namespace PresentacionFinal
 {
     public class Piso
     {
-        int numero { get; set; }
-        Sector[] sector { get; set; }
+        public Piso(int numero, Sector[] sector)
+        {
+            this.numero = numero;
+            this.sector = sector;
+        }
+
+        public int numero { get; set; }
+        public Sector[] sector { get; set; }
     }
 }

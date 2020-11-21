@@ -9,14 +9,14 @@ namespace PresentacionFinal
     public class Director
     {
         IConstructor constructor;
-        public void Construir(string titulo, DateTime fechaDesde, DateTime fechaHasta, 
-            string[] estados, string[] pisos, string[] sectores, bool totalizar,
+        public void Construir(string titulo, DateTime fechaDesde, DateTime fechaHasta,
+            List<string> estados, List<string> pisos, List<string> sectores, int totalizarPor,
             Pedido[] pedidos, Object[] calculosReporte, string usuario,
             DateTime fechaHoraActual)
         {
             constructor.ConstruirProducto();
             constructor.ConstruirEncabezado(titulo, fechaDesde, fechaHasta);
-            constructor.ConstruirCuerpo(estados, sectores, calculosReporte);
+            constructor.ConstruirCuerpo(estados.ToArray(), sectores.ToArray(), calculosReporte);
             constructor.ConstruirPieDePagina(usuario, fechaHoraActual);
 
         }

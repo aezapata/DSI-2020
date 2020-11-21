@@ -23,7 +23,7 @@ namespace PresentacionFinal
         Table table;
         public VistaPDF() 
         {
-            PdfWriter writer = new PdfWriter("C:\\Users\\Ali CN\\Desktop\\demo.pdf");
+            PdfWriter writer = new PdfWriter("C:\\Users\\Zapata\\Desktop\\demo.pdf");
             pdf = new PdfDocument(writer);
             document = new Document(pdf);
         }
