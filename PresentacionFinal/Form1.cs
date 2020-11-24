@@ -44,8 +44,8 @@ namespace PresentacionFinal
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-            if (gestor.NuevoReporteTiemposP(estadosSeleccionados, pisosSeleccionados, sectoresSeleccionados))
+            gestor.TomarPeriodo(dateTimePicker1.Value, dateTimePicker2.Value);
+            if (gestor.tomarConfirmacion(estadosSeleccionados, pisosSeleccionados, sectoresSeleccionados))
             {
                 MessageBox.Show("PDF Creado con exito ;)", "Creacion de PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -189,12 +189,14 @@ namespace PresentacionFinal
 
                 int y = 20;
                 System.Windows.Forms.CheckBox box;
-                for (int i = 0; i < piso.sector.Length; i++)
+                var sector = piso.sectores.ToArray();
+
+                for (int i = 0; i < sector.Length; i++)
                 {
                     box = new System.Windows.Forms.CheckBox();
                     box.Name = "Sector";
-                    box.Tag = piso.sector[i].nombre;
-                    box.Text = "Piso " + piso.sector[i].nombre;
+                    box.Tag = sector[i].nombre;
+                    box.Text = "Piso " + sector[i].nombre;
                     box.AutoSize = true;
                     box.Location = new Point(5, y); //vertical
                     box.Checked = true;

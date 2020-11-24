@@ -14,7 +14,7 @@ public int CalcularNumeroDePag()
             throw new NotImplementedException();
         }
 
-        public void ConstruirCuerpo(string[] estados, string[] sectores, object[] calculoReporte)
+        public void ConstruirCuerpo(string[] estados, string[] sectores, List<object> calculoReporte)
         {
             for (int i=0; i < sectores.Length; i++)
             {
