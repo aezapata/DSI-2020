@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PresentacionFinal
 {
-    public class ConstructorReportePDF:IConstructor
+    public class ConstructorReportePDF: IConstructor
     {
         VistaPDF vistaPDF;
 
@@ -14,7 +14,7 @@ public int CalcularNumeroDePag()
             throw new NotImplementedException();
         }
 
-        public void ConstruirCuerpo(string[] estados, string[] sectores, List<object> calculoReporte)
+        public void ConstruirCuerpo(string[] estados, string[] sectores, List<SectorPorEstadosDuraciones> calculoReporte)
         {
             for (int i=0; i < sectores.Length; i++)
             {
@@ -23,10 +23,16 @@ public int CalcularNumeroDePag()
                 if (i < 1)
                 {
                     //vistaPDF.reporteCuerpo = new string[sectores.Length][];
-                    vistaPDF.AgregarFila(sectores[i], estados[i], calculoReporte[i], calculoReporte[i+1], calculoReporte[i+2]);
+                    //vistaPDF.AgregarFila(sectores[i], estados[i], calculoReporte[i], calculoReporte[i]);
                 }
                 //else Agregar una nueva pagina.
-
+            }
+            foreach (var sector in calculoReporte)
+            {
+                foreach (var estado in sector.estadoDuraciones)
+                {
+                    vistaPDF.AgregarFila(sector.sector, estado.estado, estado.duracionMax, estado.duracionMin, estado.promedio);
+                }
             }
         }
 

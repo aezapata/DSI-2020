@@ -19,9 +19,9 @@ namespace PresentacionFinal
         string nombre { get; set; }
         Mesa mesa    { get; set; }
 
-        public List<object> buscarPedCumpFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
+        public List<EstadosDuraciones> buscarPedCumpFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
         {
-            List<object> estadosConDuracion = new List<object>();
+            List<EstadosDuraciones> estadosConDuracion = new List<EstadosDuraciones>();
 
             if(mesa != null)
             {

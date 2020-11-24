@@ -40,7 +40,7 @@ namespace PresentacionFinal
         List<int> tiemposAbierto = new List<int>();
         List<int> tiemposCobrado = new List<int>();
         List<int> tiemposFacturado = new List<int>();
-        private List<object> sectoresConDuracion;
+        private List<SectorPorEstadosDuraciones> sectoresConDuracion;
 
         public GestorReporteDeTiemposEnPedido()
         {
@@ -116,12 +116,13 @@ namespace PresentacionFinal
             Pedido pedido1 = new Pedido(3, new DateTime(2020, 11, 10, 10, 30, 15), 1, he1);
 
 
-            HistorialEstado hp21 = new HistorialEstado(new DateTime(2020, 11, 9, 10, 30, 15), new DateTime(2020, 11, 9, 10, 40, 15), EstadoAbierto);
+            HistorialEstado hp21 = new HistorialEstado(new DateTime(2020, 11, 9, 9, 30, 15), new DateTime(2020, 11, 9, 10, 40, 15), EstadoAbierto);
             HistorialEstado hp22 = new HistorialEstado(new DateTime(2020, 11, 9, 10, 40, 15), new DateTime(2020, 11, 9, 10, 45, 15), EstadoCobrado);
+            HistorialEstado hp23 = new HistorialEstado(new DateTime(2020, 11, 23, 10, 46, 15), new DateTime(2020, 11, 23, 12, 54, 15), EstadoFacturado);
             List<HistorialEstado> he2 = new List<HistorialEstado>();
             he2.Add(hp21);
             he2.Add(hp22);
-
+            he2.Add(hp23);
             Pedido pedido2 = new Pedido(2, new DateTime(2020, 11, 10, 10, 30, 15), 1, he2);
 
 
@@ -302,7 +303,7 @@ namespace PresentacionFinal
                 }
             }
 
-            List<Object> duracionesPorEstado = new List<object>();
+            List<SectorPorEstadosDuraciones> duracionesPorEstado = new List<SectorPorEstadosDuraciones>();
 
             foreach (var pisoSel in pisosSeleccionadosObjetos)
             {
@@ -311,7 +312,23 @@ namespace PresentacionFinal
             }
 
             this.sectoresConDuracion = duracionesPorEstado;
+            this.calcularTiempos();
+        }
 
+        private void calcularTiempos()
+        {
+
+            foreach (var sector in sectoresConDuracion)
+            {
+                foreach (var estado in sector.estadoDuraciones)
+                {
+                    double duraciones = 0;
+                    estado.duraciones.ForEach(x => duraciones += x);
+                    double promedio = duraciones / estado.contEstado;
+                    double duracionMax = estado.duraciones.OrderByDescending(x => x).First();
+                    double duracionMin = estado.duraciones.OrderBy(x => x).First();
+                }
+            }
         }
 
 

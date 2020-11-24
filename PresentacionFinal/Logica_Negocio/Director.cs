@@ -11,7 +11,7 @@ namespace PresentacionFinal
         IConstructor constructor;
         public void Construir(string titulo, DateTime fechaDesde, DateTime fechaHasta,
             List<string> estados, List<string> pisos, List<string> sectores, int totalizarPor,
-            Pedido[] pedidos, List<object> calculosReporte, string usuario,
+            Pedido[] pedidos, List<SectorPorEstadosDuraciones> calculosReporte, string usuario,
             DateTime fechaHoraActual)
         {
             constructor.ConstruirProducto();

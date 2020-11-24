@@ -12,7 +12,7 @@ namespace PresentacionFinal
         public abstract int CalcularNumeroDePag();
 
 
-        public abstract void ConstruirCuerpo(string[] estados, string[] sectores, List<object> calculoReporte);
+        public abstract void ConstruirCuerpo(string[] estados, string[] sectores, List<SectorPorEstadosDuraciones> calculoReporte);
         public abstract void ConstruirEncabezado(string titulo, DateTime fechaDesde, DateTime fechaHasta);
 
         public abstract void ConstruirPieDePagina(string usuario, DateTime fechaHoraActual);

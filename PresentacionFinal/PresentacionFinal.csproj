@@ -101,6 +101,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ISectorPorEstadosDuraciones.cs" />
     <Compile Include="Logica_Negocio\ConstructorReportePDF.cs" />
     <Compile Include="Logica_Negocio\Director.cs" />
     <Compile Include="Logica_Negocio\GestorReporteDeTiemposEnPedido.cs" />

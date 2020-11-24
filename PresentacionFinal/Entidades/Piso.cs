@@ -16,7 +16,7 @@ namespace PresentacionFinal
         public int numero { get; set; }
         public List<Sector> sectores { get; set; }
 
-        public List<Object> buscarPedidosCumplenFiltros(List<string> estadosSeleccionados, List<string> sectoresSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
+        public List<SectorPorEstadosDuraciones> buscarPedidosCumplenFiltros(List<string> estadosSeleccionados, List<string> sectoresSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
         {
             List<Sector> sectoresFiltrados = new List<Sector>();
             
@@ -30,19 +30,29 @@ namespace PresentacionFinal
                 }
             }
 
-            List<Object> estadosDuracionFiltrado = new List<Object>();
+            List<SectorPorEstadosDuraciones> estadosDuracionFiltrado = new List<SectorPorEstadosDuraciones>();
 
             foreach (var sector in sectoresFiltrados)
             {
-                List<object> sectorConInfo = sector.buscarPedCumpFiltros(estadosSeleccionados, fechaDesde, fechaHasta);
+                SectorPorEstadosDuraciones sectorConInfo = sector.buscarPedCumpFiltros(estadosSeleccionados, fechaDesde, fechaHasta);
 
                 if (sectorConInfo != null )
                 {
-                    estadosDuracionFiltrado = estadosDuracionFiltrado.Concat(sectorConInfo).ToList();
+                    estadosDuracionFiltrado.Add(sectorConInfo);
                 }
             }
 
-            
+            foreach (var sector in estadosDuracionFiltrado)
+            {
+                foreach (var estado in sector.estadoDuraciones)
+                {
+                    double duraciones = 0;
+                    estado.duraciones.ForEach(x => duraciones += x);
+                    estado.promedio = duraciones / estado.contEstado;
+                    estado.duracionMax = estado.duraciones.OrderByDescending(x => x).First();
+                    estado.duracionMin = estado.duraciones.OrderBy(x => x).First();
+                }
+            }
 
             return estadosDuracionFiltrado;
         }

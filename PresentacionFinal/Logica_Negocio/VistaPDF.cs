@@ -70,7 +70,7 @@ namespace PresentacionFinal
             document.Add(header);
         }
 
-        public void AgregarFila(string sectores, string estados, Object calculosMax, Object calculosMin, Object calculosProm)
+        public void AgregarFila(string sectores, string estados, double calculosMax, double calculosMin, double calculosProm)
         {
 
             List<Cell> fila = SetFila(sectores, estados, calculosMax, calculosMin, calculosProm);

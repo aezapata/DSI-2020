@@ -21,9 +21,9 @@ namespace PresentacionFinal
         List<Pedido> pedidos { get; set; }
         UnionDeMesa union { get; set; }
 
-        public List<object> buscarPedCumplFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
+        public List<EstadosDuraciones> buscarPedCumplFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
         {
-            List<object> estadoDuracion = new List<object>();
+            List<EstadosDuraciones> estadoDuracion = new List<EstadosDuraciones>();
             
             var pedidos = this.pedidos.Where(x => x.fechaHoraPed >= fechaDesde && x.fechaHoraPed <= fechaHasta).ToList();
 
@@ -56,14 +56,9 @@ namespace PresentacionFinal
                 
                 if(duraciones.Count != 0)
                 {
-                    estadoDuracion.Add( new { estadoSeleccionado = estado, duraciones = duraciones, contadorEstado = contadorEstado });
+                    estadoDuracion.Add( new EstadosDuraciones { estado = estado, duraciones = duraciones, contEstado = contadorEstado });
                 }
 
-                //string[][] vectorEstadoDuraciones = new string[estadoDuracion.Count][];
-                //foreach (var item in estadoDuracion)
-                //{
-                //    string
-                //}
             }
 
             return estadoDuracion;

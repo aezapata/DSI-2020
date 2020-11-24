@@ -20,15 +20,15 @@ namespace PresentacionFinal
         int[] ubicacionVentana { get; set; }
         List<Seccion> secciones { get; set; }
 
-        public List<object> buscarPedCumpFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
+        public SectorPorEstadosDuraciones buscarPedCumpFiltros(List<string> estadosSeleccionados, DateTime fechaDesde, DateTime fechaHasta)
         {
-            List<object> estadosDuracionSector = new List<object>();
+            
+            List<EstadosDuraciones> estadosDuracionSector = new List<EstadosDuraciones>();
 
             foreach (var seccion in secciones)
             {
-
                 // Busca estados y duracion de cada mesa
-                List<object> estadosConPromedioSeccion = seccion.buscarPedCumpFiltros(estadosSeleccionados, fechaDesde, fechaHasta);
+                List<EstadosDuraciones> estadosConPromedioSeccion = seccion.buscarPedCumpFiltros(estadosSeleccionados, fechaDesde, fechaHasta);
                 
                 if (estadosConPromedioSeccion != null )
                 {
@@ -37,9 +37,25 @@ namespace PresentacionFinal
 
             }
 
-            estadosDuracionSector.Add(new { sector = this.nombre, promedios = estadosDuracionSector });
+            var estadosDuplicados = estadosDuracionSector.GroupBy(i => i.estado).Where(g => g.Count() > 1).Select(g => g.Key);
 
-            return estadosDuracionSector;
+            foreach (var estado in estadosDuplicados)
+            {
+                var estados = estadosDuracionSector.Where(x => x.estado == estado).ToList();
+                List<double> duraciones = new List<double>();
+                int contEstados = 1;
+                foreach (var item in estados)
+                {
+                    duraciones = duraciones.Concat(item.duraciones).ToList();
+                    contEstados += item.contEstado;
+                }
+
+                estadosDuracionSector.RemoveAll(x => x.estado == estado);
+                estadosDuracionSector.Add(new EstadosDuraciones { estado = estado, duraciones = duraciones, contEstado = contEstados });
+            }
+
+
+            return new SectorPorEstadosDuraciones{ sector = this.nombre, estadoDuraciones = estadosDuracionSector };
         }
 
 
